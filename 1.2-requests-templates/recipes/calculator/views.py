@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +29,19 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def answer(request, dish):
+    # Считываю, есть ли параметр servings в url, если нет - то количество персон на блюдо = 1
+    servings = int(request.GET.get("servings", 1))
+    if dish in DATA.keys():
+        recipes = dict()
+        for key, value in DATA[dish].items():
+            recipes[key] = round(value * servings, 2)
+        context = {
+
+            'recipe': recipes,
+
+        }
+        return render(request, 'calculator/index.html', context)
+    return HttpResponse('Не знаю такого рецепта :(')
