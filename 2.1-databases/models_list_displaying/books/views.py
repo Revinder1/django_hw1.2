@@ -34,15 +34,3 @@ def books_view(request, pub_date):
             'books': Book.objects.order_by('pub_date').all()
         }
     return render(request, template, context)
-    # if Book.objects.filter(pub_date=pub_date):
-    #     context = {
-    #         'books': Book.objects.filter(pub_date=pub_date),
-    #     }
-    #     return render(request, template, context)
-    #
-
-
-# < a
-# href = "?{{ oldest_book.pub_date|date:"
-# Y - m - d
-# " }}" > Назад < / a >
