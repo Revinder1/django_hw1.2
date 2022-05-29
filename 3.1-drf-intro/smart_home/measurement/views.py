@@ -40,8 +40,6 @@ class MeasurementView(RetrieveAPIView):
     serializer_class = MeasurementSerializer
 
     def post(self, request):
-        measurement = Measurement.objects.create(temperature=request.data['temperature'],
-                                                 sensor=Sensor.objects.get(id=request.data['sensor']))
         new_measurement = MeasurementSerializer(data=request.data)
         if new_measurement.is_valid():
             new_measurement.save()
