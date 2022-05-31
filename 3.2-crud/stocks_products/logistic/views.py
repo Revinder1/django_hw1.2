@@ -6,6 +6,11 @@ from logistic.models import Product, Stock
 from logistic.serializers import ProductSerializer, StockSerializer
 
 
+
+class CustomSearchFilter(SearchFilter):
+    search_param = "products"
+
+
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -16,8 +21,8 @@ class ProductViewSet(ModelViewSet):
 class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
-    # Переделал зарезервированное слово search на слово products
-    filter_backends = [SearchFilter]
+    # Переопределил search_param у класса SearchFilter для данного view-класса
+    filter_backends = [CustomSearchFilter]
     # Поиск по названию или описанию поля с частичным или полным совпадением без учета регистра чтобы могли искать
     # например таким образом: ..stocks/?products=огуре
     search_fields = ['products__title', 'products__description']
