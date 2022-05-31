@@ -41,7 +41,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         """Метод для валидации. Вызывается при создании и обновлении."""
 
         # TODO: добавьте требуемую валидацию
-        print(self.context["request"])
+
         count = Advertisement.objects.filter(creator=self.context["request"].user).filter(status='OPEN').count()
         # Проверяем не болеее ли 10 открытых объявлений у пользователя
         if count >= 10 and data.get("status") != "CLOSED":
@@ -49,3 +49,4 @@ class AdvertisementSerializer(serializers.ModelSerializer):
                                                 ' закройте или удалите предыдущие объявления прежде чем продолжить')
 
         return data
+

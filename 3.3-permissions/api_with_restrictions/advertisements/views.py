@@ -13,7 +13,6 @@ class AdvertisementViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     permission_classes = [IsOwnerOrReadOnly]
     filterset_class = AdvertisementFilter
-
     # TODO: настройте ViewSet, укажите атрибуты для кверисета,
     #   сериализаторов и фильтров
     #
